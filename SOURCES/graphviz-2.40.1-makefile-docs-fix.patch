@@ -1,0 +1,16 @@
+diff --git a/tclpkg/gv/Makefile.am b/tclpkg/gv/Makefile.am
+index 0b0b1f1..d42bf57 100644
+--- a/tclpkg/gv/Makefile.am
++++ b/tclpkg/gv/Makefile.am
+@@ -451,7 +451,10 @@ pdf = gv.3sharp.pdf gv.3go.pdf gv.3guile.pdf gv.3io.pdf gv.3java.pdf gv.3lua.pdf
+       gv.3ruby.pdf gv.3tcl.pdf
+ 
+ 
+-$(man): gv.i gv_doc_writer.tcl gv_doc_template.tcl gv_doc_langs.tcl
++$(man): gv_doc_writer.intermediate ;
++
++.INTERMEDIATE: gv_doc_writer.intermediate
++gv_doc_writer.intermediate: gv.i gv_doc_writer.tcl gv_doc_template.tcl gv_doc_langs.tcl
+ 	$(TCLSH) $(srcdir)/gv_doc_writer.tcl "$(srcdir)"
+ 
+ gv.3sharp.pdf: gv.3sharp
